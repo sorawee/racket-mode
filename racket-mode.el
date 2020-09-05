@@ -29,6 +29,7 @@
 
 ;;; Code:
 
+(require 'racket-doc)
 (require 'racket-edit)
 (require 'racket-xp)
 (require 'racket-custom)
@@ -67,6 +68,7 @@
      ("M-C-u"       racket-backward-up-list)
      ("C-c C-p"     racket-cycle-paren-shapes)
      ("M-C-y"       racket-insert-lambda)
+     ("C-c C-d"     racket-documentation)
      ("M-C-."       racket-visit-module)
      ("M-,"         racket-unvisit)
      ("C-c C-f"     racket-fold-all-tests)
@@ -187,6 +189,12 @@ If you run this command, ever, you should run it again after:
          (prompt (format "Do `%s` " command)))
     (when (y-or-n-p prompt)
       (async-shell-command command))))
+
+
+(defun racket-documentation (&optional prefix)
+  "Search documentation, when `racket-xp-mode' is not being used."
+  (interactive "P")
+  (racket--doc prefix 'namespace nil))
 
 ;;; Commands that predate `racket-xp-mode'
 
