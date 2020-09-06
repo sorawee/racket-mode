@@ -27,7 +27,8 @@
   (let ((search-p (equal prefix '(16))))
     (pcase (racket--symbol-at-point-or-prompt prefix
                                               "Documentation for: "
-                                              (unless search-p completions))
+                                              (unless search-p completions)
+                                              search-p)
       ((and (pred stringp) str)
        (if search-p
            (racket--search-doc str)
